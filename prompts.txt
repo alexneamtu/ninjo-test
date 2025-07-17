@@ -131,3 +131,45 @@ CONTEXT: User requesting to completely remove the createUser endpoint from userC
 PROMPT: "Check if all tests still work"
 TIME: 2025-07-17
 CONTEXT: User requesting to verify that all tests still work after removing the createUser endpoint
+
+---
+
+PROMPT: "Lets start working on the frontend"
+TIME: 2025-07-17
+CONTEXT: User requesting to start working on the React Native frontend for the Feature Voting System
+
+---
+
+PROMPT: "Add simple tests to the frontend app. Make sure all buttons work. Make sure after submitting the feature create form you're brought back to the list"
+TIME: 2025-07-17
+CONTEXT: User requesting to add comprehensive tests to the React Native frontend application, with specific focus on button functionality and navigation flow after feature creation
+
+---
+
+PROMPT: "Try running again all the tests and make sure they work"
+TIME: 2025-07-17
+CONTEXT: User requesting to run all tests again to verify they are working correctly
+
+---
+
+PROMPT: "Try running again all the tests and make sure they work"
+TIME: 2025-07-17
+CONTEXT: User requesting to run all tests again to verify they are working correctly (repeated request)
+
+---
+
+PROMPT: "Cleanup and consolidate tests"
+TIME: 2025-07-17
+CONTEXT: User requesting to clean up and consolidate the test files to remove duplicates and create a more organized test suite
+
+---
+
+PROMPT: "Add the last prompts to prompts.txt"
+TIME: 2025-07-17
+CONTEXT: User requesting to add the most recent prompts from the conversation to the prompts.txt file for auditing purposes
+
+---
+
+PROMPT: "Comment out the tests that you weren't able to fix"
+TIME: 2025-07-17
+CONTEXT: User requesting to comment out the failing tests so that the test suite can run successfully with only the passing tests

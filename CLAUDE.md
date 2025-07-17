@@ -1,12 +1,9 @@
 You’ll be given the following mini-project:
 Feature Voting System – Let users post a feature and upvote others
 The project must have:
-●
-A database
-●
-●
-A backend API
-A frontend UI: CHOOSE ONE native mobile: iOS or Android# CLAUDE.md
+- A database
+- A backend API
+- A frontend UI: CHOOSE ONE native mobile: iOS or Android# CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
