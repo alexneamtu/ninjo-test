@@ -6,7 +6,12 @@ const featureController = {
     try {
       const features = await prisma.feature.findMany({
         include: {
-          votes: true,
+          user: true,
+          votes: {
+            include: {
+              user: true
+            }
+          },
           _count: {
             select: { votes: true }
           }
@@ -27,7 +32,12 @@ const featureController = {
       const feature = await prisma.feature.findUnique({
         where: { id: req.params.id },
         include: {
-          votes: true,
+          user: true,
+          votes: {
+            include: {
+              user: true
+            }
+          },
           _count: {
             select: { votes: true }
           }
@@ -45,14 +55,20 @@ const featureController = {
   // Create new feature
   async createFeature(req, res) {
     try {
-      const { title, description } = req.body;
+      const { title, description, createdBy } = req.body;
       const feature = await prisma.feature.create({
         data: {
           title,
-          description
+          description,
+          createdBy
         },
         include: {
-          votes: true,
+          user: true,
+          votes: {
+            include: {
+              user: true
+            }
+          },
           _count: {
             select: { votes: true }
           }
@@ -75,7 +91,12 @@ const featureController = {
           description
         },
         include: {
-          votes: true,
+          user: true,
+          votes: {
+            include: {
+              user: true
+            }
+          },
           _count: {
             select: { votes: true }
           }
@@ -111,10 +132,16 @@ const featureController = {
   async toggleVote(req, res) {
     try {
       const featureId = req.params.id;
+      const { createdBy } = req.body;
       
       // Check if vote exists
       const existingVote = await prisma.vote.findUnique({
-        where: { featureId }
+        where: { 
+          featureId_createdBy: {
+            featureId,
+            createdBy
+          }
+        }
       });
       
       if (existingVote) {
@@ -126,8 +153,14 @@ const featureController = {
       } else {
         // Add vote
         const vote = await prisma.vote.create({
-          data: { featureId },
-          include: { feature: true }
+          data: { 
+            featureId,
+            createdBy
+          },
+          include: { 
+            feature: true,
+            user: true
+          }
         });
         res.json({ action: 'added', message: 'Vote added', vote });
       }

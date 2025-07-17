@@ -19,7 +19,7 @@ beforeAll(async () => {
   
   // Reset database before running tests
   try {
-    execSync('npx prisma migrate reset --force', { stdio: 'pipe' });
+    execSync('npx prisma db push --force-reset --accept-data-loss', { stdio: 'pipe' });
   } catch (error) {
     console.error('Failed to reset database:', error);
   }

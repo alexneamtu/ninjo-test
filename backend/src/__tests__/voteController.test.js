@@ -1,7 +1,7 @@
 const request = require('supertest');
 const express = require('express');
 const voteRoutes = require('../routes/voteRoutes');
-const { createTestFeature, createTestVote, cleanupTestData } = require('./helpers');
+const { createTestUser, createTestFeature, createTestVote, cleanupTestData } = require('./helpers');
 
 const app = express();
 app.use(express.json());
@@ -28,9 +28,8 @@ describe('Vote Controller', () => {
     it('should return all votes with feature details', async () => {
       const feature1 = await createTestFeature({ title: 'Feature 1' });
       const feature2 = await createTestFeature({ title: 'Feature 2' });
-      const vote1 = await createTestVote(feature1.id);
-      const vote2 = await createTestVote(feature2.id);
-
+      await createTestVote(feature1.id);
+      await createTestVote(feature2.id);
       const response = await request(app)
         .get('/api/votes')
         .expect(200);
@@ -68,11 +67,12 @@ describe('Vote Controller', () => {
 
   describe('POST /api/votes', () => {
     it('should create new vote', async () => {
-      const feature = await createTestFeature();
+      const user = await createTestUser();
+      const feature = await createTestFeature({ createdBy: user.id });
 
       const response = await request(app)
         .post('/api/votes')
-        .send({ featureId: feature.id })
+        .send({ featureId: feature.id, createdBy: user.id })
         .expect(201);
 
       expect(response.body.featureId).toBe(feature.id);
@@ -82,12 +82,13 @@ describe('Vote Controller', () => {
     });
 
     it('should return 409 for duplicate vote', async () => {
-      const feature = await createTestFeature();
-      await createTestVote(feature.id);
+      const user = await createTestUser();
+      const feature = await createTestFeature({ createdBy: user.id });
+      await createTestVote(feature.id, user.id);
 
       const response = await request(app)
         .post('/api/votes')
-        .send({ featureId: feature.id })
+        .send({ featureId: feature.id, createdBy: user.id })
         .expect(409);
 
       expect(response.body.error).toBe('Vote already exists for this feature');

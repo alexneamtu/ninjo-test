@@ -1,7 +1,7 @@
 const request = require('supertest');
 const express = require('express');
 const featureRoutes = require('../routes/featureRoutes');
-const { createTestFeature, createTestVote, cleanupTestData } = require('./helpers');
+const { createTestUser, createTestFeature, createTestVote, cleanupTestData } = require('./helpers');
 
 const app = express();
 app.use(express.json());
@@ -27,7 +27,7 @@ describe('Feature Controller', () => {
 
     it('should return all features with vote counts', async () => {
       const feature1 = await createTestFeature({ title: 'Feature 1' });
-      const feature2 = await createTestFeature({ title: 'Feature 2' });
+      await createTestFeature({ title: 'Feature 2' });
       await createTestVote(feature1.id);
 
       const response = await request(app)
@@ -66,9 +66,11 @@ describe('Feature Controller', () => {
 
   describe('POST /api/features', () => {
     it('should create new feature', async () => {
+      const user = await createTestUser();
       const featureData = {
         title: 'New Feature',
-        description: 'New Description'
+        description: 'New Description',
+        createdBy: user.id
       };
 
       const response = await request(app)
@@ -146,10 +148,12 @@ describe('Feature Controller', () => {
 
   describe('POST /api/features/:id/toggle-vote', () => {
     it('should add vote when none exists', async () => {
-      const feature = await createTestFeature();
+      const user = await createTestUser();
+      const feature = await createTestFeature({ createdBy: user.id });
 
       const response = await request(app)
         .post(`/api/features/${feature.id}/toggle-vote`)
+        .send({ createdBy: user.id })
         .expect(200);
 
       expect(response.body.action).toBe('added');
@@ -158,11 +162,13 @@ describe('Feature Controller', () => {
     });
 
     it('should remove vote when it exists', async () => {
-      const feature = await createTestFeature();
-      await createTestVote(feature.id);
+      const user = await createTestUser();
+      const feature = await createTestFeature({ createdBy: user.id });
+      await createTestVote(feature.id, user.id);
 
       const response = await request(app)
         .post(`/api/features/${feature.id}/toggle-vote`)
+        .send({ createdBy: user.id })
         .expect(200);
 
       expect(response.body.action).toBe('removed');

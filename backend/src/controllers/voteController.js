@@ -6,7 +6,8 @@ const voteController = {
     try {
       const votes = await prisma.vote.findMany({
         include: {
-          feature: true
+          feature: true,
+          user: true
         },
         orderBy: {
           createdAt: 'desc'
@@ -24,7 +25,8 @@ const voteController = {
       const vote = await prisma.vote.findUnique({
         where: { id: req.params.id },
         include: {
-          feature: true
+          feature: true,
+          user: true
         }
       });
       if (!vote) {
@@ -39,13 +41,15 @@ const voteController = {
   // Create new vote
   async createVote(req, res) {
     try {
-      const { featureId } = req.body;
+      const { featureId, createdBy } = req.body;
       const vote = await prisma.vote.create({
         data: {
-          featureId
+          featureId,
+          createdBy
         },
         include: {
-          feature: true
+          feature: true,
+          user: true
         }
       });
       res.status(201).json(vote);

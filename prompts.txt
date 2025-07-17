@@ -107,3 +107,27 @@ CONTEXT: User requesting to write Jest tests for the backend API endpoints and f
 PROMPT: "Fix \"Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?\""
 TIME: 2025-07-17
 CONTEXT: User requesting to fix Jest force exit warning by properly handling async operations and database connections
+
+---
+
+PROMPT: "Create an User model and add a createdBy userId in each other model"
+TIME: 2025-07-17
+CONTEXT: User requesting to create User model and add user relationships to Feature and Vote models
+
+---
+
+PROMPT: "create simple user:password  register/login endpoints"
+TIME: 2025-07-17
+CONTEXT: User requesting to create simple authentication endpoints with password hashing and JWT tokens
+
+---
+
+PROMPT: "Remove createUser endpoint altogether"
+TIME: 2025-07-17
+CONTEXT: User requesting to completely remove the createUser endpoint from userController since authentication endpoints handle user creation
+
+---
+
+PROMPT: "Check if all tests still work"
+TIME: 2025-07-17
+CONTEXT: User requesting to verify that all tests still work after removing the createUser endpoint

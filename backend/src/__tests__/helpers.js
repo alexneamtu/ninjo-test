@@ -1,7 +1,30 @@
 const prisma = require('../config/database');
 
+// Helper function to create test user
+async function createTestUser(data = {}) {
+  const bcrypt = require('bcrypt');
+  const hashedPassword = await bcrypt.hash('testpassword', 10);
+  
+  const defaultData = {
+    email: `test${Date.now()}@example.com`,
+    name: 'Test User',
+    password: hashedPassword,
+    ...data
+  };
+  
+  return await prisma.user.create({
+    data: defaultData
+  });
+}
+
 // Helper function to create test feature
 async function createTestFeature(data = {}) {
+  // Create user if not provided
+  if (!data.createdBy) {
+    const user = await createTestUser();
+    data.createdBy = user.id;
+  }
+  
   const defaultData = {
     title: 'Test Feature',
     description: 'Test Description',
@@ -14,10 +37,17 @@ async function createTestFeature(data = {}) {
 }
 
 // Helper function to create test vote
-async function createTestVote(featureId) {
+async function createTestVote(featureId, createdBy) {
+  // Create user if not provided
+  if (!createdBy) {
+    const user = await createTestUser();
+    createdBy = user.id;
+  }
+  
   return await prisma.vote.create({
     data: {
-      featureId
+      featureId,
+      createdBy
     }
   });
 }
@@ -27,6 +57,7 @@ async function cleanupTestData() {
   try {
     await prisma.vote.deleteMany({});
     await prisma.feature.deleteMany({});
+    await prisma.user.deleteMany({});
   } catch (error) {
     // Ignore cleanup errors during tests
     console.error('Cleanup error:', error.message);
@@ -44,6 +75,7 @@ async function disconnectDatabase() {
 }
 
 module.exports = {
+  createTestUser,
   createTestFeature,
   createTestVote,
   cleanupTestData,
