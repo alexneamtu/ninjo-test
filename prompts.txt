@@ -173,3 +173,33 @@ CONTEXT: User requesting to add the most recent prompts from the conversation to
 PROMPT: "Comment out the tests that you weren't able to fix"
 TIME: 2025-07-17
 CONTEXT: User requesting to comment out the failing tests so that the test suite can run successfully with only the passing tests
+
+---
+
+PROMPT: "load prompts.txt for context"
+TIME: 2025-07-17
+CONTEXT: User requesting to load and review the context from the prompts.txt file
+
+---
+
+PROMPT: "Fix the frontend tests, don't stop until `npm test` runs without errors"
+TIME: 2025-07-17
+CONTEXT: User requesting to fix all frontend tests until npm test runs successfully without any errors
+
+---
+
+PROMPT: "Uncomment commented tests, keep them if they're relevant or delete them if not"
+TIME: 2025-07-17
+CONTEXT: User requesting to review all commented tests, uncomment relevant ones, and delete irrelevant ones to clean up the test suite
+
+---
+
+PROMPT: "Create a README.md file"
+TIME: 2025-07-17
+CONTEXT: User requesting to create a comprehensive README.md file for the Feature Voting System project
+
+---
+
+PROMPT: "Get API_BASE_URL from env"
+TIME: 2025-07-17
+CONTEXT: User requesting to configure the API_BASE_URL to be read from environment variables instead of hardcoded
