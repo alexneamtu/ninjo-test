@@ -1,0 +1,109 @@
+For each prompt - give you, write to a file prompts.txt, so I can audit the work.
+
+---
+
+PROMPT: "/init Please analyze this codebase and create a CLAUDE.md file, which will be given to future instances of Claude Code to operate in this repository."
+TIME: 2025-07-17
+CONTEXT: Initial command to analyze codebase and create documentation
+
+---
+
+PROMPT: "Update CLAUDE.md for a mini-project: Feature Voting System – Let users post a feature and upvote others. The project must have: - A database: help me choose it - A backend API: ask me about options - A frontend UI: CHOOSE ONE native mobile: iOS or Android"
+TIME: 2025-07-17
+CONTEXT: Request to update CLAUDE.md with new project requirements
+
+---
+
+PROMPT: "I'll go with node.js, postgresql (using primsa), react native"
+TIME: 2025-07-17
+CONTEXT: User providing tech stack choices for the Feature Voting System
+
+---
+
+PROMPT: "For each prompt - give you, write to a file prompts.txt, so I can audit the work."
+TIME: 2025-07-17
+CONTEXT: User selected text from prompts.txt reminding about logging prompts for auditing
+
+---
+
+PROMPT: "Do you have a history of my prompts?"
+TIME: 2025-07-17
+CONTEXT: User asking about prompt history availability
+
+---
+
+PROMPT: "Add what you have from previous prompts in prompts.txt"
+TIME: 2025-07-17
+CONTEXT: Request to add all previous prompts from current session to the file
+
+---
+
+PROMPT: "Run the Development Setup"
+TIME: 2025-07-17
+CONTEXT: User requesting to execute the development setup commands from CLAUDE.md
+
+---
+
+PROMPT: "Don't prompt me about writing to prompts.txt"
+TIME: 2025-07-17
+CONTEXT: User instructing to stop asking about logging prompts, just do it automatically
+
+---
+
+PROMPT: "Fix .env DATABASE_URL to use localhost:5432 - user: ninjo, password: ninjo"
+TIME: 2025-07-17
+CONTEXT: User requesting to configure DATABASE_URL in .env file with specific credentials
+
+---
+
+PROMPT: "Alter prisma shema to create the votes model"
+TIME: 2025-07-17
+CONTEXT: User requesting to modify Prisma schema to add voting model for feature voting system
+
+---
+
+PROMPT: "npx prisma migrate dev"
+TIME: 2025-07-17
+CONTEXT: User requesting to run Prisma migration to create database tables
+
+---
+
+PROMPT: "load context from prompts.txt"
+TIME: 2025-07-17
+CONTEXT: User requesting to load and review the context from the prompts.txt file
+
+---
+
+PROMPT: "Move ./backend/frontend code to  ./frontend"
+TIME: 2025-07-17
+CONTEXT: User requesting to move frontend code from backend/frontend directory to frontend directory
+
+---
+
+PROMPT: "Create simple crud for the prisma models in backend"
+TIME: 2025-07-17
+CONTEXT: User requesting to create CRUD API endpoints for the Prisma models in the backend
+
+---
+
+PROMPT: "Refactor index.js into logical folders"
+TIME: 2025-07-17
+CONTEXT: User requesting to refactor the monolithic index.js file into a proper folder structure
+
+---
+
+PROMPT: "Put the backend code under ./backend/src"
+TIME: 2025-07-17
+CONTEXT: User requesting to move backend code into a src directory for better organization
+
+---
+
+PROMPT: "Write simple tests for the backend application using jest"
+TIME: 2025-07-17
+CONTEXT: User requesting to write Jest tests for the backend API endpoints and functionality
+
+---
+
+PROMPT: "Fix \"Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?\""
+TIME: 2025-07-17
+CONTEXT: User requesting to fix Jest force exit warning by properly handling async operations and database connections
