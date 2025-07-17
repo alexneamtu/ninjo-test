@@ -6,16 +6,20 @@ jest.mock('@react-native-async-storage/async-storage', () =>
 );
 
 // Mock React Navigation
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => ({
-    navigate: jest.fn(),
-    goBack: jest.fn(),
-    setOptions: jest.fn(),
-  }),
-  useRoute: () => ({
-    params: {},
-  }),
-}));
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: jest.fn(),
+      goBack: jest.fn(),
+      setOptions: jest.fn(),
+    }),
+    useRoute: () => ({
+      params: {},
+    }),
+  };
+});
 
 // Mock fetch
 global.fetch = jest.fn();
@@ -32,5 +36,4 @@ global.console = {
 beforeEach(() => {
   // Reset all mocks before each test
   jest.clearAllMocks();
-  global.fetch.mockClear();
 });

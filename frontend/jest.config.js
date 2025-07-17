@@ -19,4 +19,8 @@ module.exports = {
   verbose: true,
   testTimeout: 10000,
   forceExit: true,
+  resolver: 'jest-pnp-resolver',
+  testEnvironmentOptions: {
+    enablePackageExports: true,
+  },
 };
